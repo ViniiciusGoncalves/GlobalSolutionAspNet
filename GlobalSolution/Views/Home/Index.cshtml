@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <!-- Div para o Mapa do Google Maps -->
+    <div id="map" style="width:100%;height:400px;"></div>
+</div>
+
+<script>
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: { lat: -23.5505, lng: -46.6333 }, // Ponto central inicial do mapa
+        });
+
+        // Chamada para obter localizações cadastradas
+        fetch('http://localhost:8080/hospitalclinicas/localizacao')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(location => {
+                    new google.maps.Marker({
+                        position: { lat: location.latitude, lng: location.longitude },
+                        map: map,
+                        title: location.nomeHospital
+                    });
+                });
+            })
+            .catch(error => console.error('Erro ao carregar localizações:', error));
+    }
+
+    window.initMap = initMap;
+</script>
+
+
+
+<!-- Substitua 'YOUR_API_KEY' pela sua chave de API do Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq0LTWTbur6ce4gKA3u0q48yZZXYJ_Vdo&callback=initMap"></script>
+}

@@ -1,0 +1,24 @@
+﻿@model GlobalSolution.Models.MedicoViewModel
+
+@{
+    ViewBag.Title = "Editar Médico";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Medico", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.MedicoId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeMedico)
+        @Html.EditorFor(model => model.NomeMedico)
+        @Html.ValidationMessageFor(model => model.NomeMedico)
+    </div>
+
+    <!-- Adicione campos para outras propriedades aqui -->
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}

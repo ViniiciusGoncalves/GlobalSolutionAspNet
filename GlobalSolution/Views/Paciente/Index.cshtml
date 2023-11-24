@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GlobalSolution.Models.Paciente>
+
+<div class="container mt-3">
+    <h2>Pacientes</h2>
+    <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Adicionar Novo Paciente</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Sexo</th>
+                <th>Rua</th>
+                <th>Número</th>
+                <th>CEP</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var paciente in Model)
+            {
+                <tr>
+                    <td>@paciente.Nome</td>
+                    <td>@paciente.DataNascimento?.ToString("dd/MM/yyyy")</td>
+                    <td>@paciente.Sexo</td>
+                    <td>@paciente.Endereco?.Rua</td>
+                    <td>@paciente.Endereco?.Numero</td>
+                    <td>@paciente.Endereco?.Cep</td>
+                    <td>@paciente.Endereco?.Cidade.NomeCidade</td>
+                    <td>@paciente.Endereco?.Cidade.Estado.NomeEstado</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Paciente", new { id = paciente.PacienteId })" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="@Url.Action("Delete", "Paciente", new { id = paciente.PacienteId })" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+</div>

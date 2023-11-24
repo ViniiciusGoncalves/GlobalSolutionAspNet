@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GlobalSolution.Models.MedicoViewModel>
+
+<div class="container mt-3">
+    <h2>Médicos</h2>
+    <a href="@Url.Action("Create", "Medico")" class="btn btn-primary mb-3">Adicionar Novo Médico</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th>CRM</th>
+                <th>Hospital</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medico in Model)
+            {
+                <tr>
+                    <td>@medico.NomeMedico</td>
+                    <td>@medico.Especialidade</td>
+                    <td>@medico.Crm</td>
+                    <td>@medico.NomeHospital</td> <!-- Supondo que você tenha uma propriedade NomeHospital -->
+                    <td>
+                        <a href="@Url.Action("Edit", "Medico", new { id = medico.MedicoId })" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="@Url.Action("Delete", "Medico", new { id = medico.MedicoId })" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+</div>
