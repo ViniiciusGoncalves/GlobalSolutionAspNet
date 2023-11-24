@@ -2,15 +2,24 @@
 
 namespace GlobalSolution.TagHelpers
 {
+    [HtmlTargetElement("button", Attributes = "asp-type")]
     public class ButtonTagHelper : TagHelper
     {
+        public string AspType { get; set; }
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            // Adicione os atributos type, value, classes e estilo diretamente ao elemento input
-            output.Attributes.SetAttribute("type", "submit");
-            output.Attributes.SetAttribute("value", "Salvar");
-            output.Attributes.Add("class", "btn btn-primary");
-            output.Attributes.Add("style", "margin-top: 20px;");
+            output.TagName = "button";  
+            output.TagMode = TagMode.StartTagAndEndTag; 
+
+            output.Attributes.SetAttribute("type", string.IsNullOrEmpty(AspType) ? "button" : AspType);
+
+            if (!output.Attributes.ContainsName("class"))
+            {
+                output.Attributes.Add("class", "btn btn-primary");
+            }
+
+            output.Attributes.SetAttribute("style", "margin-top: 20px;");
         }
     }
 }

@@ -51,6 +51,7 @@
             @Html.DropDownListFor(model => model.NomeCidade, new SelectList(Model.Cidades, "NomeCidade", "NomeCidade"), "Selecione uma Cidade", new { @class = "form-control" })
         </div>
 
-        <input is-submit-button />
+        <button asp-type="submit">Salvar</button>
+
     }
 </div>
