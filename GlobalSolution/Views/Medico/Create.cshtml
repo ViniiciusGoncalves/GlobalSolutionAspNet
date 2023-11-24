@@ -4,6 +4,8 @@
     ViewBag.Title = "Cadastro de Médico";
 }
 
+<alert alert-type="@TempData["SuccessMessage"]"></alert>
+
 <div class="container">
     <h2 class="mt-5">@ViewBag.Title</h2>
 
@@ -47,6 +49,6 @@
 
         <!-- Adicione campos adicionais para endereço do hospital se necessário -->
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <input is-submit-button />
     }
 </div>
